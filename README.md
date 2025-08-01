@@ -5,6 +5,9 @@ Tech Stack
 - Backend: Python
 - Model: TensorFlow + Keras (EfficientNet)
 - Image Handling: Pillow, NumPy
-  ### Demo Screenshot
+  ### Demo
+### Demo 
 ![Deepfake Detection Screenshot](image_1.png)
+![Deepfake Detection Screenshot](image_2.png)
+
 
