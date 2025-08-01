@@ -4,4 +4,5 @@ Tech Stack
 - Frontend/UI: Streamlit
 - Backend: Python
 - Model: TensorFlow + Keras (EfficientNet)
-- Image Handling: Pillow, NumP
+- Image Handling: Pillow, NumPy
+  
