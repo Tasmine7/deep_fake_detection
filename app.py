@@ -54,3 +54,4 @@ if uploaded_file is not None:
         st.error(f"Fake Face Detected! Confidence: {prediction:.2f}")
     else:
         st.success(f"Real Face Detected! Confidence: {1 - prediction:.2f}")
+
