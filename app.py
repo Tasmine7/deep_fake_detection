@@ -8,13 +8,13 @@ from tensorflow.keras.layers import Activation, Dropout
 from PIL import Image
 from keras.utils import register_keras_serializable
 
-# Register swish activation (used in EfficientNet)
+
 def swish(x):
     return tf.nn.swish(x)
 
 get_custom_objects().update({'swish': Activation(swish)})
 
-# Register FixedDropout (custom layer used in model)
+
 @register_keras_serializable(package="efficientnet.model")
 class FixedDropout(Dropout):
     def __init__(self, rate, noise_shape=None, seed=None, **kwargs):
@@ -23,13 +23,13 @@ class FixedDropout(Dropout):
     def call(self, inputs, training=None):
         return super(FixedDropout, self).call(inputs, training=training)
 
-# Load model with custom objects
+
 model = load_model(
     "deepfake_efficientnet_model.keras",
     custom_objects={'swish': swish, 'FixedDropout': FixedDropout}
 )
 
-# Streamlit UI
+
 st.title("Deepfake Detection App")
 st.write("Upload a face image to check if it's real or fake.")
 
@@ -40,18 +40,19 @@ if uploaded_file is not None:
     st.image(img, caption='Uploaded Image', use_container_width=True)
 
 
-    # Preprocess the image
+    
     img = img.resize((224, 224))
     img_array = image.img_to_array(img)
     img_array = img_array / 255.0
     img_array = np.expand_dims(img_array, axis=0)
 
-    # Prediction
+
     prediction = model.predict(img_array)[0][0]
 
-    # Result
+    
     if prediction > 0.5:
         st.error(f"Fake Face Detected! Confidence: {prediction:.2f}")
     else:
         st.success(f"Real Face Detected! Confidence: {1 - prediction:.2f}")
+
 
